@@ -199,6 +199,38 @@ def get_pattern(text):
     line['BERT'] = get_KeyBERT(text)
     return line
 
+def get_sintetic(text):
+    line = {}
+    line['text'] = text.strip()
+    line['remove_all'] = remove_all(text).strip()
+    line['normal_form'] = get_normal_form(remove_all(text).strip())
+    line['RAKE'] = set_scores(get_RAKE(text))
+    line['YAKE'] = get_YAKE(text)
+    line['BERT'] = get_KeyBERT(text)
+    str1="Возможные фразы сгенерированные нейросетевыми методами: \n"
+    l= 26
+    num_all = 0
+    num_sin = 0
+    for item in line['RAKE']:
+        num_all +=1
+        if len(item[0])> l:
+            str1+=f"Фрагмент {num_sin}: {item[0]} \n"
+            num_sin+=1
+    for item in line['BERT']:
+        num_all +=1
+        if len(item[0])> l:
+            str1+=f"Фрагмент {num_sin}: {item[0]} \n"
+            num_sin+=1            
+    for item in line['YAKE']:
+        num_all +=1
+        if len(item[0])> l:
+            str1+=f"Фрагмент {num_sin}: {item[0]} \n"
+            num_sin+=1
+            
+    str1+=f"Общее количество фраз сгенерированные нейросетевыми методами: {num_sin/num_all*100} %\n"                   
+    line['sintetic'] = str1
+    return line
+
 
 def add_print_text(data):
     RAKE_text =[]

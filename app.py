@@ -43,6 +43,14 @@ def get_pattern():
     print(data['print_text'])
     return data
 
+@app.route("/get_sintetic", methods=['POST'])
+def get_sintetic():
+    msg = request.json
+    print(msg)
+    data = process_nlp.get_pattern(msg['text'])
+    print(data['sintetic'])
+    return data
+
 
 @app.route("/get_pattern_add", methods=['POST'])
 def get_pattern_add():
