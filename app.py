@@ -47,7 +47,7 @@ def get_pattern():
 def get_sintetic():
     msg = request.json
     print(msg)
-    data = process_nlp.get_pattern(msg['text'])
+    data = process_nlp.get_sintetic(msg['text'])
     print(data['sintetic'])
     return data
 
